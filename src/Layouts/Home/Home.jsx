@@ -23,7 +23,7 @@ const Home = () => {
                     <aside className='col-span-3'>
                         <LeftAside></LeftAside>
                     </aside>
-                    <div className="main-content col-span-6">
+                    <div className="main-content col-span-6 w-11/12 mx-auto">
                         <Outlet></Outlet>
                     </div>
                     <aside className='col-span-3'>
