@@ -20,13 +20,13 @@ const Home = () => {
                     </nav>
                 </header>
                 <main className='w-11/12 mx-auto grid grid-cols-12 lg:mt-20'>
-                    <aside className='col-span-3'>
+                    <aside className='col-span-3 sticky h-fit top-0'>
                         <LeftAside></LeftAside>
                     </aside>
                     <div className="main-content col-span-6 w-11/12 mx-auto">
                         <Outlet></Outlet>
                     </div>
-                    <aside className='col-span-3'>
+                    <aside className='col-span-3 sticky h-fit top-0'>
                         <RightAside></RightAside>
                     </aside>
                 </main>

@@ -3,6 +3,9 @@ import Home from "../Layouts/Home/Home";
 import Homepage from "../Pages/Homepage";
 import CatagoryNews from "../Pages/CatagoryNews";
 import { Suspense } from "react";
+import Auth from "../Layouts/Auth/Auth";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
 
 const route = createBrowserRouter([
     {
@@ -18,6 +21,20 @@ const route = createBrowserRouter([
             loader: () => fetch('/news.json'),
             Component: CatagoryNews
            }
+        ]
+    },
+    {
+        path: 'auth',
+        Component: Auth,
+        children: [
+            {
+                path: '/auth/login',
+                Component: Login
+            },
+            {
+                path: '/auth/register',
+                Component: Register,
+            }
         ]
     }
 ])

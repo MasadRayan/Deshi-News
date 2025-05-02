@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaRegEye, FaStar } from "react-icons/fa";
 import { IoMdShare } from 'react-icons/io';
 import { MdBookmarkBorder } from 'react-icons/md';
@@ -13,11 +13,6 @@ const NewsCard = ({ news }) => {
         rating,
     } = news;
 
-    const [isExpanded, setIsExpanded] = useState(false);
-
-    const toggleReadMore = () => {
-        setIsExpanded(!isExpanded);
-    };
 
     const formatDate = (dateString) => {
         const options = { year: "numeric", month: "long", day: "numeric" };
@@ -40,7 +35,7 @@ const NewsCard = ({ news }) => {
                     </div>
                 </div>
                 <div className='flex gap-3 cursor-pointer'>
-                    <MdBookmarkBorder className='hover:text-[#FF8C47]' size={24}/>
+                    <MdBookmarkBorder className='hover:text-[#FF8C47]' size={24} />
                     <IoMdShare size={24}></IoMdShare>
                 </div>
             </div>
@@ -55,16 +50,12 @@ const NewsCard = ({ news }) => {
                 className="w-full px-4 h-48 object-cover rounded-md mb-3"
             />
 
-            {/* Details with Toggle */}
-            <p className="text-sm text-gray-700 pb-2 border-b-1 border-base-300 mx-4 mb-3">
-                {isExpanded ? details : `${details.slice(0, 150)}...`}
-                <button
-                    className="text-[#FF8C47] hover:underline font-semibold ml-1"
-                    onClick={toggleReadMore}
-                >
-                    {isExpanded ? " Show Less" : " Read More"}
-                </button>
+            {/* Details */}
+            <p className="text-sm text-gray-700 mb-3">
+                {details.length > 150 ? details.slice(0, 150) + "..." : details}
+                <span className="font-semibold cursor-pointer text-[#FF8C47] hover:underline"> Read More</span>
             </p>
+
 
             {/* Footer */}
             <div className="flex px-4 mt-2 items-center justify-between text-sm text-gray-600">

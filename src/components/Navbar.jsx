@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import user from "../assets/user.png"
 
 const Navbar = () => {
@@ -9,7 +9,7 @@ const Navbar = () => {
         <NavLink to={'/career'}>Career</NavLink>
     </>
     return (
-        <div className="navbar my-8">
+        <div className="navbar py-8">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -30,7 +30,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end space-x-3">
             <img src={user} alt="" />
-            <button className='btn btn-primary px-10 text-lg'>Login</button>
+            <Link to={'/auth/login'} className='btn btn-primary px-10 text-lg'>Login</Link>
             </div>
         </div>
     );
