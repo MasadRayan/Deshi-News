@@ -6,6 +6,8 @@ import { Suspense } from "react";
 import Auth from "../Layouts/Auth/Auth";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import NewsDetails from "../Pages/NewsDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const route = createBrowserRouter([
     {
@@ -36,6 +38,14 @@ const route = createBrowserRouter([
                 Component: Register,
             }
         ]
+    },
+    {
+        path: '/news-details/:id',
+        element: 
+        <PrivateRoute>
+            <NewsDetails></NewsDetails>
+        </PrivateRoute>,
+        loader: () => fetch('/news.json'),
     }
 ])
 

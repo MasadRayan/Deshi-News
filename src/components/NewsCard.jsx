@@ -2,9 +2,11 @@ import React from 'react';
 import { FaRegEye, FaStar } from "react-icons/fa";
 import { IoMdShare } from 'react-icons/io';
 import { MdBookmarkBorder } from 'react-icons/md';
+import { Link } from 'react-router';
 
 const NewsCard = ({ news }) => {
     const {
+        id,
         title,
         author,
         thumbnail_url,
@@ -51,9 +53,9 @@ const NewsCard = ({ news }) => {
             />
 
             {/* Details */}
-            <p className="text-sm text-gray-700 mb-3">
+            <p className="text-sm text-gray-700 px-3 mb-3">
                 {details.length > 150 ? details.slice(0, 150) + "..." : details}
-                <span className="font-semibold cursor-pointer text-[#FF8C47] hover:underline"> Read More</span>
+                <Link to={`/news-details/${id}`} className="font-semibold cursor-pointer text-[#FF8C47] hover:underline"> Read More</Link>
             </p>
 
 

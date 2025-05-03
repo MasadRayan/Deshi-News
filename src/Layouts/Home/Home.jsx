@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
-import { Outlet } from 'react-router';
+import { Outlet, ScrollRestoration } from 'react-router';
 import LeatestNews from '../../components/LeatestNews';
 import Navbar from '../../components/Navbar';
 import LeftAside from '../../components/HomeLayout/LeftAside';
@@ -30,10 +30,8 @@ const Home = () => {
                         <RightAside></RightAside>
                     </aside>
                 </main>
-                <footer>
-
-                </footer>
             </div>
+            <ScrollRestoration></ScrollRestoration>
         </>
     );
 };
