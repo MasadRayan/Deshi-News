@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link, NavLink } from 'react-router';
-import user from "../assets/user.png"
+import userlogo from "../assets/user.png"
+import { AuthContext } from '../Provider/Authcontext';
 
 const Navbar = () => {
+
+    const {user, removeUser} = use(AuthContext)
+
     const links = <>
         <NavLink to={'/'}>Home</NavLink>
         <NavLink to={'/about'}>About</NavLink>
         <NavLink to={'/career'}>Career</NavLink>
     </>
+
+    const handleRemoveUser = () => {
+        removeUser()
+        .then(() => {
+            
+          }).catch((error) => {
+            console.log(error);
+          });
+    }
     return (
         <div className="navbar py-8">
             <div className="navbar-start">
@@ -21,7 +34,9 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                
+                <div>
+                    {user && <p>{user.email}</p>}
+                </div>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 gap-5 text-accent text-lg">
@@ -29,8 +44,11 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end space-x-3">
-            <img src={user} alt="" />
-            <Link to={'/auth/login'} className='btn btn-primary px-10 text-lg'>Login</Link>
+            <img src={userlogo} alt="" />
+            {
+                user ? <button onClick={handleRemoveUser} className='btn btn-primary px-10 text-lg'>Log Out</button> : <Link to={'/auth/login'} className='btn btn-primary px-10 text-lg'>Login</Link>
+            }
+            
             </div>
         </div>
     );
