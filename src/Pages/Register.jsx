@@ -1,10 +1,12 @@
-import React, { use } from 'react';
-import { Link } from 'react-router';
+import React, { use, useState } from 'react';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/Authcontext';
 
 const Register = () => {
 
-    const {createUser, setUser} = use(AuthContext);
+    const { createUser, setUser, profileUpdate } = use(AuthContext);
+    const [nameError, setNameError] = useState('');
+    const nevigate = useNavigate();
 
     const handleRegister = e => {
         e.preventDefault();
@@ -13,20 +15,37 @@ const Register = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
+        setNameError('');
+
+        if (name.length < 5) {
+            setNameError("Name should be At least 5 characters");
+            return;
+        }
+        else {
+            setNameError('');
+        }
+
         createUser(email, password)
-        .then((result) => {
-             
-            const user = result.user;
-            // console.log(user);
-            setUser(user);
-            
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage)
-          });
-        
+            .then((result) => {
+
+                const user = result.user;
+
+                profileUpdate({ displayName: name, photoURL: photo })
+                    .then(() => {
+                        setUser({ ...user,  displayName: name, photoURL: photo});
+                        nevigate('/');
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        setUser(user);
+                    })
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage)
+            });
+
     }
 
     return (
@@ -42,29 +61,33 @@ const Register = () => {
                         className="input"
                         placeholder="name"
                         required />
+
+                    {
+                        nameError && <p className='text-red-500 text-xs'>{nameError}</p>
+                    }
                     {/* photo */}
                     <label className="label">Photo URL</label>
                     <input
                         type="text"
                         name='photo'
                         className="input"
-                        placeholder="Photo Url" 
-                        required/>
+                        placeholder="Photo Url"
+                        required />
                     {/* email */}
                     <label className="label">Email</label>
-                    <input 
+                    <input
                         type="email"
                         name='email'
                         className="input"
-                        placeholder="Email" 
-                        required/>
+                        placeholder="Email"
+                        required />
                     {/* password */}
                     <label className="label">Password</label>
                     <input
                         type="password"
                         name='password'
-                        className="input" placeholder="Password" 
-                        required/>
+                        className="input" placeholder="Password"
+                        required />
                     {/* button */}
                     <button type='submit' className="btn  btn-neutral mt-4">Register</button>
                     <p className='font-semibold mt-5 text-center'>

@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCIGIzwweS8gt-rxdv2Vd8TCjn3M9h8AHE",
-  authDomain: "deshi-news-7a00d.firebaseapp.com",
-  projectId: "deshi-news-7a00d",
-  storageBucket: "deshi-news-7a00d.firebasestorage.app",
-  messagingSenderId: "430549458547",
-  appId: "1:430549458547:web:32dd28eb8cde6bce435406"
+  apiKey:import.meta.env.VITE_apiKey,
+  authDomain:import.meta.env.VITE_authDomain,
+  projectId:import.meta.env.VITE_projectId,
+  storageBucket:import.meta.env.VITE_storageBucket,
+  messagingSenderId:import.meta.env.VITE_messagingSenderId,
+  appId:import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

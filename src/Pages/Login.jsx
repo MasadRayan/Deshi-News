@@ -1,4 +1,4 @@
-import React, { use, useState } from 'react';
+import React, { use, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/Authcontext';
 
@@ -6,8 +6,9 @@ const Login = () => {
     const [errorMassage, setErrorMassage] = useState('')
     const location = useLocation();
     const navigate = useNavigate();
+    const emailRef = useRef();
 
-    const { signInUser, setUser } = use(AuthContext);
+    const { signInUser, setUser, passwordReset } = use(AuthContext);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -30,6 +31,20 @@ const Login = () => {
                 setErrorMassage(errorMessage)
             });
     }
+
+    const handleForgetPass = () => {
+        const email = emailRef.current.value;
+        passwordReset(email)
+            .then(() => {
+                alert("Password reset email sent");
+            })
+            .catch((error) => {
+                
+                const errorMessage = error.message;
+                setErrorMassage(errorMessage);
+            });
+    }
+
     return (
         <>
             <div className="card  w-full max-w-sm shrink-0 shadow-2xl mx-auto mt-20 py-10 ">
@@ -39,6 +54,7 @@ const Login = () => {
                         {/* email */}
                         <label className="label">Email</label>
                         <input
+                            ref={emailRef}
                             type="email"
                             name='email'
                             className="input"
@@ -56,7 +72,7 @@ const Login = () => {
                             errorMassage && <p className='text-red-500 text-xs'>{errorMassage}</p>
                         }
                         <div>
-                            <a className="link link-hover">Forgot password?</a>
+                            <a  onClick={handleForgetPass} className="link link-hover">Forgot password?</a>
                         </div>
                         <button type='submit' className="btn  btn-neutral mt-4">Login</button>
                         <p className='font-semibold mt-5 text-center'>

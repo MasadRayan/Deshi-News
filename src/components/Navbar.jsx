@@ -34,8 +34,8 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <div>
-                    {user && <p>{user.email}</p>}
+                <div className='text-xl font-bold'>
+                    {user && <p>{user.displayName}</p>}
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -44,7 +44,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end space-x-3">
-            <img src={userlogo} alt="" />
+            <img className='w-13 rounded-full' src={user? user.photoURL : userlogo} alt="" />
             {
                 user ? <button onClick={handleRemoveUser} className='btn btn-primary px-10 text-lg'>Log Out</button> : <Link to={'/auth/login'} className='btn btn-primary px-10 text-lg'>Login</Link>
             }
